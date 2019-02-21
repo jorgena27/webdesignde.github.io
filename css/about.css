@@ -1,0 +1,35 @@
+.info{
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 10px;
+
+}
+
+@media screen and (min-width: 500px) {
+
+   html {
+    height: 100%;
+  }
+
+  body {
+    height: 100%;
+  }
+
+  .contentHeight {
+    height: calc(100% - 110px);
+    margin-bottom: -75px
+  }
+
+  .nav {
+    height: 36px;
+  }
+
+  .footer{
+    height: 75px;
+    bottom:0;
+  }
+
+  .container{
+    height: 100%;
+  }
+}

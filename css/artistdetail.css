@@ -1,0 +1,49 @@
+.artistProfile {
+  padding-bottom: 20px;
+}
+
+.artistsPortrait {
+  width: 200px;
+  height: 200px;
+}
+
+p{
+  padding: 10px;
+}
+
+.paintings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.painting img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  width: 250px;
+  height: 200px;
+  border: 10px solid lightgrey;
+}
+
+.painting {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 33%;
+          flex: 1 1 33%;
+  padding: 20px;
+}
+
+
+@media screen and (min-width: 500px) {
+
+  .artistProfile {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding-bottom: 50px;
+    padding-left: 30px;
+  }
+}

@@ -1,0 +1,18 @@
+.content{
+  padding-top: 0;
+}
+
+.banner img {
+  width: 100%;;
+}
+
+.info{
+  padding: 10px;
+}
+
+@media screen and (min-width: 500px){
+    .info{
+      padding-left: 20%;
+      padding-right: 20%;
+    }
+}
