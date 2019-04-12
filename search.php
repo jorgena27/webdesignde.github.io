@@ -1,59 +1,27 @@
 <?php get_header(); ?>	
-<?php $shortname = "pixel_theme"; ?>
-<div id="slideshow_cont">
-	<div class="flicker-example fullplate" data-block-text="false">
-		
-		<ul>			
-			<?php
-			$slider_arr = array();
-			$x = 0;
-			$args = array(
-				 //'category_name' => 'blog',
-				 'post_type' => 'post',
-				 'meta_key' => 'ex_show_in_slideshow',
-				 'meta_value' => 'Yes',
-				 'posts_per_page' => 99
-				 );
-			query_posts($args);
-			while (have_posts()) : the_post(); 
-				$thumb = wp_get_attachment_image_src( get_post_thumbnail_id(get_the_ID()), 'full' );
-				//$thumb = wp_get_attachment_image_src( get_post_thumbnail_id(get_the_ID()), 'large' );
-				$img_url = $thumb['0']; 
-			?>		
-				<li data-background="<?php echo $img_url; ?>" onclick="location.href='<?php the_permalink(); ?>';" style="cursor:pointer;">
-				
-					
-				</li>		
-			<?php array_push($slider_arr,get_the_ID()); ?>
-			<?php $x++; ?>
-			<?php endwhile; ?>
-			<?php wp_reset_query(); ?>                                    		
-	
-		</ul>
-		
-	</div>
-</div> <!-- //slideshow_cont -->
 <div id="content">
+	
 	<div class="container">
-		<div class="home_featured">
-			<?php echo stripslashes(stripslashes(get_option($shortname.'_featured_text',''))); ?>
-		</div> <!-- //home_featured -->
-		<div class="clear"></div>
+		<?php if(is_category()) { ?>
+		<div class="archive_title">
+			<?php printf( __( '%s', 'twentyten' ), '<span>' . single_cat_title( '', false ) . '</span>' ); ?>
+			<div class="clear"></div>
+		</div><!--//archive_title-->
+		<?php } ?>	
 	</div> <!-- //container -->
 	<div id="home_cont">
 		<div id="stalac_cont">
 		
 			<?php
-			$category_ID = get_category_id('blog');
-			$args = array(
-			'category_name' => 'noposts',
-				 'post_type' => 'post',
-				 'posts_per_page' => 3,
-				 'post__not_in' => $slider_arr,
-				 'cat' => '-' . $category_ID
-				 );
-			query_posts($args);
-			while (have_posts()) : the_post(); ?>	
+			global $wp_query;
+			//if(is_paged()) {
+				//$args = array_merge( $wp_query->query, array( 'posts_per_page' => 2 ) );
+			//} else {
+				$args = array_merge( $wp_query->query, array( 'posts_per_page' => -1 ) );
+			//}
+			query_posts( $args );        
+			$x = 0;
+			while (have_posts()) : the_post(); ?>     		
 			
 				<div class="item stalac_box">
 					<span class="stalac_box_img">
@@ -71,7 +39,7 @@
 										<span class="stalac_box_hover_inside_cell stalac_box_hover_inside_cell3"></span>
 										<span class="stalac_box_hover_inside_cell">
 											<h3><?php the_title(); ?></h3>
-											
+											<?php echo ds_get_excerpt('100'); ?>
 										</span> <!-- //stalac_box_hover_inside_cell -->
 										<span class="stalac_box_hover_inside_cell stalac_box_hover_inside_cell3"></span>
 									</span> <!-- //stalac_box_hover_inside_row -->
@@ -83,10 +51,9 @@
 					
 				</div> <!-- //stalac_box -->
 			
-			<?php endwhile; ?>
-			 <?php wp_reset_query(); ?>                                   				
+			<?php endwhile; ?>				
 		
 		</div><!--//stalac_cont-->	
 	</div> <!-- //home_cont -->
-</div> <!-- //content -->
+</div><!--//content-->
 <?php get_footer(); ?> 		
